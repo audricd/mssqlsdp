@@ -7,7 +7,8 @@ import subprocess
 l1 = "Microsoft SQL Support Diagnostic Package for Red Hat (WORK IN PROGRESS, NON OPERATIONAL YET)"
 l2 = "This script will gather basic system information for helping troubleshooting MSSQL server issues"
 
-print(l1, '\n', l2)
+print(l1)
+print(l2)
 
 # TO DO:
 # create log folder based on current date
@@ -65,3 +66,13 @@ def fPyVer():
     pyver = open("pyver.txt", "w");
     subprocess.Popen("python -V", stdout=pyver)
     print ("exporting Python version...")
+
+
+# step 1. check OS and if MSSQL-server is installed
+stringstep1 = ("First, we need to check if this is a Red Hat box, and if MSSQL is installed")
+print (stringstep1)
+try:
+    release = open('/etc/redhat-release', 'r').read()
+    print ("You are using " + release)
+except:
+    print("You are not using Red Hat")
