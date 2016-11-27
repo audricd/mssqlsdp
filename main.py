@@ -71,8 +71,17 @@ def fPyVer():
 # step 1. check OS and if MSSQL-server is installed
 stringstep1 = ("First, we need to check if this is a Red Hat box, and if MSSQL is installed")
 print (stringstep1)
+package = subprocess.Popen("rpm -q mssql-server", shell=True,
+                           stdout=subprocess.PIPE,
+                           stderr=subprocess.PIPE)
+
+# wait for the process to terminate
+packagesqlout, packagesqlerr = package.communicate()
+packagesqlerrcode = package.returncode
+
 try:
     release = open('/etc/redhat-release', 'r').read()
-    print ("You are using " + release)
+    print ("You are using " + release + "and " + packagesqlout)
 except:
-    print("You are not using Red Hat")
+    print("You are not using Red Hat and " + packagesqlout)
+
